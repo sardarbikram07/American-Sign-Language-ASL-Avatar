@@ -1,0 +1,18 @@
+# Commands to Run ASL Fingerpelling Recognition App
+
+## Backend Server
+# Open a terminal and run:
+cd src\server
+python server.py
+
+## Frontend Server
+# Open another terminal and run:
+cd src\client
+npm run dev
+
+## Notes
+- Run backend first, then frontend
+- Backend runs on http://localhost:1234
+- Frontend runs on http://localhost:3001
+- Make sure virtual environment is activated for backend (if using venv)
+- Ensure all dependencies are installed
