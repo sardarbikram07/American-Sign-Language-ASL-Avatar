@@ -35,7 +35,7 @@
 <div align="center">
 
 | ✨ **Real-time Recognition** | 🤖 **AI-Powered Correction** | 🔊 **Natural Speech Synthesis** |
-|:---------------------------:|:---------------------------:|:------------------------------:|
+|:-----------------------------:|:-----------------------------:|:-------------------------------:|
 | Webcam-based hand tracking with 99%+ accuracy | Google Gemini integration for intelligent spell-checking | Web Speech API for lifelike voice output |
 | ⚡ **Instant Processing** | 🎨 **Beautiful UI** | 📱 **Fully Responsive** |
 | Process 30+ FPS with minimal latency | Modern dark theme with glassmorphism | Works on desktop, tablet, and mobile |
@@ -163,15 +163,15 @@ docker run -p 1234:1234 -p 3001:3001 asl-recognition
 
 ```mermaid
 graph TB
-    A[🎥 Webcam Feed] --> B[📊 MediaPipe Hand Tracking]
-    B --> C[🧠 PointNet Classification]
-    C --> D[📝 Real-time Transcription]
-    D --> E[🤖 Google Gemini Correction]
-    E --> F[🔊 Web Speech API]
-    F --> G[🔈 Audio Output]
+    A["🎥 Webcam Feed"] --> B["📊 MediaPipe Hand Tracking"]
+    B --> C["🧠 PointNet Classification"]
+    C --> D["📝 Real-time Transcription"]
+    D --> E["🤖 Google Gemini Correction"]
+    E --> F["🔊 Web Speech API"]
+    F --> G["🔈 Audio Output"]
 
-    H[⚛️ Next.js Frontend] --> I[🌐 WebSocket Connection]
-    I --> J[🐍 Flask Backend]
+    H["⚛️ Next.js Frontend"] --> I["🌐 WebSocket Connection"]
+    I --> J["🐍 Flask Backend"]
 
     style A fill:#FF6B6B
     style H fill:#4ECDC4
@@ -436,7 +436,5 @@ If you find this project helpful, please give it a ⭐️ star on GitHub!
 <div align="center">
 
 <sub>Built with cutting-edge AI and computer vision technology</sub>
-
-</div>
 
 </div>
