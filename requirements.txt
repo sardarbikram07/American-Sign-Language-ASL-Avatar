@@ -13,3 +13,6 @@ sentence-transformers==2.2.2
 transformers==4.30.2
 tensorflow
 tf-keras
+gunicorn
+gevent
+gevent-websocket

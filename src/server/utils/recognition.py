@@ -11,10 +11,11 @@ from utils.classifier import Classifier
 
 class Recognition:
 
-    def __init__(self, min_confidence: float = 0.80):
+    def __init__(self, min_confidence: float = 0.70):
         self.min_confidence = min_confidence
         self.landmarker = Landmarker()
         self.classifier = Classifier()
+        self._word_committed = False  # guard: prevent re-appending same word every frame
 
     def process(self, image: np.ndarray):
 
@@ -64,9 +65,10 @@ class Recognition:
                     lineType=cv2.LINE_4,
                 )
         else:  # If no hand is detected, add a space
-            if Store.raw_word:
+            if Store.raw_word and not self._word_committed:
+                self._word_committed = True  # mark so we don't re-append next frame
                 Store.raw_transcription.append(Store.raw_word)
-                thread = threading.Thread(target=Bert.fix)
+                thread = threading.Thread(target=self._run_bert)
                 thread.start()
 
         output = (
@@ -78,6 +80,11 @@ class Recognition:
             Store.parse(output)
 
         return (image, different, points if success else None)
+
+    def _run_bert(self):
+        """Run Bert.fix() then reset the commit guard so the next word can be committed."""
+        Bert.fix()
+        self._word_committed = False  # ready for next word
 
     def fix_misrecognition(self, letter: str, points: np.ndarray, hand: str):
 

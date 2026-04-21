@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 
 import "@/ui/tailwind.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 
 export const metadata: Metadata = {
   title: "ASL Sign Language Recognition",
-  description: "ASL Sign Language Recognition",
+  description: "Real-time ASL fingerspell to English translation with 3D signing simulation",
 };
 
 export default function RootLayout({
@@ -23,7 +23,7 @@ export default function RootLayout({
           href="https://pro.fontawesome.com/releases/v5.15.1/css/all.css"
         />
       </head>
-      <body className={`${inter.className} bg-black`}>{children}</body>
+      <body className={`${spaceGrotesk.className} bg-black`}>{children}</body>
     </html>
   );
 }

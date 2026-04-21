@@ -1,4 +1,4 @@
-# 🎥✨ ASL Fingerpelling Recognition & Speech Synthesis
+# 🎥✨ American Sign Language (ASL) Avatar & Fingerpelling Recognition
 
 <div align="center">
 
@@ -95,8 +95,8 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/sign-language-processing.git
-cd sign-language-processing
+git clone https://github.com/sardarbikram07/American-Sign-Language-ASL-Avatar.git
+cd American-Sign-Language-ASL-Avatar
 
 # Setup backend
 python -m venv venv
@@ -118,8 +118,8 @@ cp .env.example .env
 
 ```bash
 # Build and run with Docker
-docker build -t asl-recognition .
-docker run -p 1234:1234 -p 3001:3001 asl-recognition
+docker build -t asl-avatar .
+docker run -p 1234:1234 -p 3001:3001 asl-avatar
 ```
 
 </details>
@@ -183,7 +183,7 @@ graph TB
 ### 📁 **Project Structure**
 
 ```
-sign-language-processing/
+American-Sign-Language-ASL-Avatar/
 ├── 🎨 src/client/               # Next.js React Frontend
 │   ├── 📱 app/
 │   │   ├── 🏠 page.tsx          # Main Application UI
@@ -284,34 +284,6 @@ SPEECH_RATE=1.0
 SPEECH_PITCH=1.0
 ```
 
-### ⚙️ **Camera Optimization**
-
-Adjust camera settings in `server.py`:
-
-```python
-# High-quality settings for better recognition
-camera.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
-camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
-camera.set(cv2.CAP_PROP_FPS, 30)
-camera.set(cv2.CAP_PROP_AUTOFOCUS, 1)
-```
-
-### 🎨 **UI Customization**
-
-Modify colors and themes in `src/client/`:
-
-```css
-/* Custom gradient background */
-.bg-gradient-to-br {
-  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
-}
-
-/* Custom accent colors */
-.accent-blue { color: #4ECDC4; }
-.accent-red { color: #FF6B6B; }
-.accent-purple { color: #45B7D1; }
-```
-
 ---
 
 ## 🤝 **Contributing**
@@ -332,22 +304,6 @@ We welcome contributions from developers, designers, and ASL experts!
 4. **📝 Commit** with clear messages: `git commit -m 'Add amazing feature'`
 5. **🚀 Push** to your branch: `git push origin feature/amazing-feature`
 6. **🔄 Open** a Pull Request
-
-### 🐛 **Development Guidelines**
-
-- Follow PEP 8 for Python code
-- Use ESLint for JavaScript/React
-- Write comprehensive tests
-- Update documentation
-- Ensure cross-browser compatibility
-
-### 🎯 **Areas for Contribution**
-
-- **🤖 AI/ML**: Improve model accuracy, add new languages
-- **🎨 UI/UX**: Enhance design, add new themes
-- **📱 Mobile**: Optimize for mobile devices
-- **🌍 Accessibility**: Improve screen reader support
-- **📊 Analytics**: Add usage tracking and metrics
 
 ---
 
@@ -377,14 +333,6 @@ We welcome contributions from developers, designers, and ASL experts!
 | **Next.js** | React framework | [🔗 nextjs.org](https://nextjs.org) |
 | **Tailwind CSS** | Utility-first CSS | [🔗 tailwindcss.com](https://tailwindcss.com) |
 
-### 👥 **Community Contributors**
-
-We extend our gratitude to all contributors who help make this project better!
-
-<a href="https://github.com/yourusername/sign-language-processing/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=yourusername/sign-language-processing" />
-</a>
-
 </div>
 
 ---
@@ -406,10 +354,9 @@ We extend our gratitude to all contributors who help make this project better!
 
 ### 📬 **Contact & Feedback**
 
-- 🐛 **Bug Reports**: [Open an Issue](https://github.com/yourusername/sign-language-processing/issues)
-- 💡 **Feature Requests**: [Start a Discussion](https://github.com/yourusername/sign-language-processing/discussions)
-- 📧 **Email**: [your.email@example.com](mailto:your.email@example.com)
-- 🐦 **Twitter**: [@yourusername](https://twitter.com/yourusername)
+- 🐛 **Bug Reports**: [Open an Issue](https://github.com/sardarbikram07/American-Sign-Language-ASL-Avatar/issues)
+- 💡 **Feature Requests**: [Start a Discussion](https://github.com/sardarbikram07/American-Sign-Language-ASL-Avatar/discussions)
+- 📧 **Email**: [sardarbikram07@gmail.com](mailto:sardarbikram07@gmail.com)
 
 ### 🌟 **Show Your Support**
 
@@ -435,6 +382,6 @@ If you find this project helpful, please give it a ⭐️ star on GitHub!
 
 <div align="center">
 
-<sub>Built with cutting-edge AI and computer vision technology</sub>
+<sub>Built by Bikram Sardar</sub>
 
 </div>

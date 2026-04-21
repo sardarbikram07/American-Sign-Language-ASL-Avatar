@@ -1,4 +1,5 @@
 import cv2
+import threading
 import numpy as np
 import mediapipe as mp
 from cv2.typing import MatLike
@@ -23,12 +24,14 @@ class Landmarker:
             min_tracking_confidence=min_tracking_confidence,
             max_num_hands=max_num_hands,
         )
+        self.lock = threading.Lock()
 
     def draw_landmarks(self, image: MatLike):
         image.flags.writeable = False
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
-        results = self.model.process(image)
+        with self.lock:
+            results = self.model.process(image)
 
         image.flags.writeable = True
         image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)

@@ -1,21 +1,38 @@
+print("server.py: Importing OS and core libs")
 import os
 import cv2
 import json
 import logging
-import psycopg2
+print("server.py: Importing dotenv")
 from dotenv import load_dotenv
-from flask import Flask, Response
+print("server.py: Importing flask")
+from flask import Flask, Response, request, jsonify
 from flask_socketio import SocketIO, emit
-from pgvector.psycopg2 import register_vector
-from sentence_transformers import SentenceTransformer
 
-# Force CPU usage for TensorFlow (optimization for no GPU)
-os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  # Reduce TensorFlow logging
+print("server.py: Checking database libs")
+try:
+    import psycopg2
+    from pgvector.psycopg2 import register_vector
+    PSYCOPG2_AVAILABLE = True
+except ImportError:
+    PSYCOPG2_AVAILABLE = False
+    print("psycopg2/pgvector not installed - database features disabled")
 
+try:
+    from sentence_transformers import SentenceTransformer
+    SENTENCE_TRANSFORMER_AVAILABLE = True
+except ImportError:
+    SENTENCE_TRANSFORMER_AVAILABLE = False
+    print("sentence-transformers not installed - database features disabled")
+
+print("server.py: Importing custom utils")
+print("server.py: Importing LLM")
 from utils.llm import LLM
+print("server.py: Importing Store")
 from utils.store import Store
+print("server.py: Importing Recognition")
 from utils.recognition import Recognition
+print("server.py: Finished custom imports")
 
 # Configuration
 load_dotenv()
@@ -23,28 +40,39 @@ log = logging.getLogger("werkzeug")
 log.setLevel(logging.ERROR)
 
 # Initialization
+print("Initializing LLM...")
 llm = LLM()
 app = Flask(__name__)
+print("Initializing Recognition...")
 recognition = Recognition()
-camera = cv2.VideoCapture(0)
+current_camera_index = 0
+print("Connecting to WebCam at index 0 (laptop camera)...")
+camera = cv2.VideoCapture(0)  # 0 = laptop/built-in webcam
+print("Configuring WebCam...")
 camera.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
 camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+print("Initializing SocketIO...")
 socketio = SocketIO(app, cors_allowed_origins="*")
 # Database setup (commented out if not available)
 DB_AVAILABLE = False
-try:
-    embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
-    conn = psycopg2.connect(
-        database="signs",
-        host="localhost",
-        user="postgres",
-        password=os.getenv("POSTGRES_PASSWORD"),
-        port=5432,
-    )
-    register_vector(conn)
-    DB_AVAILABLE = True
-except Exception as e:
-    print(f"Database not available: {e}")
+if PSYCOPG2_AVAILABLE and SENTENCE_TRANSFORMER_AVAILABLE:
+    try:
+        embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
+        conn = psycopg2.connect(
+            database="signs",
+            host="localhost",
+            user="postgres",
+            password=os.getenv("POSTGRES_PASSWORD"),
+            port=5432,
+        )
+        register_vector(conn)
+        DB_AVAILABLE = True
+    except Exception as e:
+        print(f"Database not available: {e}")
+        embedding_model = None
+        conn = None
+else:
+    print("Database features disabled (missing psycopg2 or sentence-transformers)")
     embedding_model = None
     conn = None
 
@@ -60,6 +88,28 @@ for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
 @app.route("/")
 def stream():
     return Response(recognize(), mimetype="multipart/x-mixed-replace; boundary=frame")
+
+
+@app.route("/set-camera", methods=["POST"])
+def set_camera():
+    """Switch the active camera by index (0 = device/built-in, 1 = external USB)"""
+    global camera, current_camera_index
+    data = request.get_json()
+    index = int(data.get("index", 0))
+    if index == current_camera_index:
+        return jsonify({"status": "ok", "camera": current_camera_index})
+    # Release existing camera and open new one
+    camera.release()
+    camera = cv2.VideoCapture(index)
+    if not camera.isOpened():
+        # Fall back to previous camera on failure
+        camera = cv2.VideoCapture(current_camera_index)
+        return jsonify({"status": "error", "message": f"Could not open camera at index {index}"}), 400
+    camera.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+    camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+    current_camera_index = index
+    print(f"Switched to camera index {index}")
+    return jsonify({"status": "ok", "camera": current_camera_index})
 
 
 def recognize():
@@ -188,4 +238,4 @@ def on_disconnect():
 
 
 if __name__ == "__main__":
-    socketio.run(app, debug=False, port=1234)
+    socketio.run(app, debug=False, port=1234, allow_unsafe_werkzeug=True)

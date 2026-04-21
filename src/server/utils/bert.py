@@ -1,4 +1,4 @@
-from neuspell import BertChecker
+# neuspell BertChecker removed - using LLM-based correction instead
 
 from utils.store import Store
 from utils.llm import LLM
