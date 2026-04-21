@@ -1,0 +1,106 @@
+<svg width="1200" height="700" viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f8f9fa;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Shadow filter -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="4" flood-opacity="0.15"/>
+    </filter>
+    
+    <!-- Glow effect -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <rect width="1200" height="700" fill="url(#bgGradient)"/>
+  
+  <!-- Title -->
+  <text x="600" y="40" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="300" fill="#2c3e50">
+    English → ASL Production Pipeline
+  </text>
+  
+  <!-- INPUT LAYER -->
+  <rect x="100" y="80" width="1000" height="80" rx="15" fill="#3498db" fill-opacity="0.08" stroke="none" filter="url(#shadow)"/>
+  
+  <!-- Text Input -->
+  <circle cx="200" cy="120" r="25" fill="#3498db" stroke="none" filter="url(#shadow)"/>
+  <text x="200" y="125" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="500" fill="white">Text</text>
+  
+  <!-- Speech Input -->
+  <circle cx="350" cy="120" r="25" fill="#9b59b6" stroke="none" filter="url(#shadow)"/>
+  <text x="350" y="125" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="500" fill="white">Voice</text>
+  
+  <!-- Web Interface -->
+  <circle cx="500" cy="120" r="25" fill="#1abc9c" stroke="none" filter="url(#shadow)"/>
+  <text x="500" y="125" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="500" fill="white">Web</text>
+  
+  <!-- API Input -->
+  <circle cx="650" cy="120" r="25" fill="#f39c12" stroke="none" filter="url(#shadow)"/>
+  <text x="650" y="125" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="500" fill="white">API</text>
+  
+  <!-- Real-time Processing -->
+  <circle cx="800" cy="120" r="25" fill="#34495e" stroke="none" filter="url(#shadow)"/>
+  <text x="800" y="125" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="500" fill="white">RT</text>
+  
+  <!-- TEXT PROCESSING PIPELINE -->
+  <rect x="100" y="190" width="1000" height="350" rx="15" fill="#ecf0f1" fill-opacity="0.6" stroke="none" filter="url(#shadow)"/>
+  
+  <!-- Processing Stage 1: Text Analysis -->
+  <rect x="150" y="230" width="200" height="60" rx="12" fill="#27ae60" stroke="none" filter="url(#shadow)"/>
+  <text x="250" y="255" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="500" fill="white">Text Analysis</text>
+  <text x="250" y="275" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="white">Normalize • Parse • Extract</text>
+  
+  <!-- Processing Stage 2: ASL Grammar -->
+  <rect x="400" y="230" width="200" height="60" rx="12" fill="#3498db" stroke="none" filter="url(#shadow)"/>
+  <text x="500" y="255" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="500" fill="white">ASL Grammar</text>
+  <text x="500" y="275" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="white">Reorder • Simplify • Convert</text>
+  
+  <!-- Processing Stage 3: Semantic Search -->
+  <rect x="650" y="230" width="200" height="60" rx="12" fill="#9b59b6" stroke="none" filter="url(#shadow)"/>
+  <text x="750" y="255" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="500" fill="white">Sign Retrieval</text>
+  <text x="750" y="275" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="white">9K+ Signs • Semantic Match</text>
+  
+  <!-- Example Translation -->
+  <rect x="200" y="320" width="600" height="70" rx="10" fill="white" fill-opacity="0.9" stroke="#bdc3c7" stroke-width="1" filter="url(#shadow)"/>
+  <text x="220" y="340" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#e74c3c">"Hello, how are you doing today?"</text>
+  <path d="M 220 350 L 780 350" stroke="#bdc3c7" stroke-width="1" stroke-dasharray="2,2"/>
+  <text x="220" y="370" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#27ae60">HELLO HOW YOU TODAY</text>
+  
+  <!-- 3D Animation Output -->
+  <rect x="150" y="430" width="700" height="80" rx="12" fill="#f39c12" stroke="none" filter="url(#shadow)"/>
+  <text x="500" y="460" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="500" fill="white">3D Animation Engine</text>
+  <text x="500" y="485" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="white">ThreeJS • MediaPipe Poses • Real-time Rendering</text>
+  
+  <!-- FLOW ARROWS -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <polygon points="0 0, 10 4, 0 8" fill="#7f8c8d" opacity="0.7"/>
+    </marker>
+  </defs>
+  
+  <!-- Input to Processing -->
+  <path d="M 500 145 Q 500 170 250 205" stroke="#7f8c8d" stroke-width="2" fill="none" marker-end="url(#arrow)" opacity="0.7"/>
+  
+  <!-- Processing Flow -->
+  <path d="M 350 260 Q 400 260 400 260" stroke="#7f8c8d" stroke-width="2" fill="none" marker-end="url(#arrow)" opacity="0.7"/>
+  <path d="M 600 260 Q 650 260 650 260" stroke="#7f8c8d" stroke-width="2" fill="none" marker-end="url(#arrow)" opacity="0.7"/>
+  
+  <!-- To Animation -->
+  <path d="M 500 390 Q 500 410 500 430" stroke="#7f8c8d" stroke-width="2" fill="none" marker-end="url(#arrow)" opacity="0.7"/>
+  
+  <!-- Performance Metrics -->
+  <rect x="100" y="580" width="1000" height="40" rx="8" fill="#34495e" fill-opacity="0.05" stroke="none"/>
+  <text x="600" y="600" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#34495e">
+    85% Comprehension • Real-time Processing • PostgreSQL+pgvector • ThreeJS Rendering
+  </text>
+  
+</svg>
